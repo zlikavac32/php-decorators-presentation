@@ -6,12 +6,12 @@ declare(strict_types=1);
 use Symfony\Component\Console\Application;
 use Symfony\Component\Lock\Factory;
 use Symfony\Component\Lock\Store\FlockStore;
+use Zlikavac32\NSBDecorators\Proxy;
 use Zlikavac32\SymfonyExtras\Command\Runnable\RunnableCommand;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/ExclusiveRunnable.php';
-require_once __DIR__ . '/ExclusiveRunnableWithDescription.php';
 require_once __DIR__ . '/CalculateFibonacciRunnable.php';
 require_once __DIR__ . '/CheckIsPrimeRunnable.php';
 
@@ -19,10 +19,21 @@ $console = new Application();
 
 $lockFactory = new Factory(new FlockStore());
 
+spl_autoload_register(Proxy::class . '::loadFQN');
+
+function decorate(string $decoratorFqn, object $subject, string $argumentName, ...$args): object
+{
+    $class = Proxy::createFQNForProxyClass($decoratorFqn, get_class($subject), $argumentName);
+
+    return new $class($subject, ...$args);
+}
+
 $console->add(
     new RunnableCommand(
-        new ExclusiveRunnableWithDescription(
+        decorate(
+            ExclusiveRunnable::class,
             new CalculateFibonacciRunnable(),
+            'runnable',
             $lockFactory,
             'fib'
         ),
