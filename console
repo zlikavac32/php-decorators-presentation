@@ -11,6 +11,7 @@ use Zlikavac32\SymfonyExtras\Command\Runnable\RunnableCommand;
 require_once __DIR__ . '/vendor/autoload.php';
 
 require_once __DIR__ . '/ExclusiveRunnable.php';
+require_once __DIR__ . '/ExclusiveRunnableWithDescription.php';
 require_once __DIR__ . '/CalculateFibonacciRunnable.php';
 require_once __DIR__ . '/CheckIsPrimeRunnable.php';
 
@@ -20,7 +21,7 @@ $lockFactory = new Factory(new FlockStore());
 
 $console->add(
     new RunnableCommand(
-        new ExclusiveRunnable(
+        new ExclusiveRunnableWithDescription(
             new CalculateFibonacciRunnable(),
             $lockFactory,
             'fib'

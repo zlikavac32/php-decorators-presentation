@@ -6,9 +6,9 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Zlikavac32\SymfonyExtras\Command\Runnable\Runnable;
+use Zlikavac32\SymfonyExtras\Command\Runnable\RunnableWithDescription;
 
-class CalculateFibonacciRunnable implements Runnable
+class CalculateFibonacciRunnable implements RunnableWithDescription
 {
 
     public function configure(InputDefinition $inputDefinition): void
@@ -40,5 +40,13 @@ class CalculateFibonacciRunnable implements Runnable
         }
 
         return $this->fibonacci($n - 1) + $this->fibonacci($n - 2);
+    }
+
+    public function description(): string
+    {
+        return <<<'STR'
+Uses a recursive algorithm without memoization to compute a
+given Fibonacci number.
+STR;
     }
 }
