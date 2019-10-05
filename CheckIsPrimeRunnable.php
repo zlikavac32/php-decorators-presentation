@@ -3,18 +3,22 @@
 declare(strict_types=1);
 
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Zlikavac32\SymfonyExtras\Command\Runnable\Runnable;
 
-class CheckIsPrimeCommand extends AbstractExclusiveCommand
+class CheckIsPrimeRunnable implements Runnable
 {
 
-    protected function configure()
+    public function configure(InputDefinition $inputDefinition): void
     {
-        $this->addArgument('n', InputArgument::REQUIRED, 'Number to check');
+        $inputDefinition->addArgument(
+            new InputArgument('n', InputArgument::REQUIRED, 'Number to check')
+        );
     }
 
-    protected function executeExclusive(InputInterface $input, OutputInterface $output): int
+    public function run(InputInterface $input, OutputInterface $output): int
     {
         $n =  (int) $input->getArgument('n');
 

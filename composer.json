@@ -1,6 +1,7 @@
 {
     "require": {
         "symfony/console": "^4.3",
-        "symfony/lock": "^4.3"
+        "symfony/lock": "^4.3",
+        "zlikavac32/symfony-extras": "^0.2.0"
     }
 }

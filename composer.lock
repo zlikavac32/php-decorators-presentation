@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "47401fccc62750098ebd0727a206f78d",
+    "content-hash": "7eff2c0722727a3513c2f9408b75bb50",
     "packages": [
         {
             "name": "psr/container",
@@ -414,6 +414,71 @@
                 "standards"
             ],
             "time": "2019-08-20T14:44:19+00:00"
+        },
+        {
+            "name": "zlikavac32/symfony-extras",
+            "version": "0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/zlikavac32/symfony-extras.git",
+                "reference": "a8abe7f01f4ae911476c0cef5b1a411357aaea6a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/zlikavac32/symfony-extras/zipball/a8abe7f01f4ae911476c0cef5b1a411357aaea6a",
+                "reference": "a8abe7f01f4ae911476c0cef5b1a411357aaea6a",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.2"
+            },
+            "require-dev": {
+                "php-ds/php-ds": "^1.2",
+                "phpunit/phpunit": "^7.5.6",
+                "symfony/config": "^4.2",
+                "symfony/console": "^4.2",
+                "symfony/dependency-injection": "^4.2",
+                "symfony/event-dispatcher": "^4.2",
+                "symfony/var-dumper": "^4.2",
+                "zlikavac32/nsb-decorators": "^0.1.0"
+            },
+            "suggest": {
+                "ext-ds": "To use this library at all",
+                "php-ds/php-ds": "If you can't install ext-ds",
+                "symfony/config": "To use console runnable",
+                "symfony/console": "To use console runnable",
+                "symfony/dependency-injection": "To use compiler passes",
+                "symfony/event-dispatcher": "To use dynamic event dispatcher",
+                "zlikavac32/nsb-decorators": "To use decorator proxies"
+            },
+            "type": "library",
+            "autoload": {
+                "files": [
+                    "src/asserts.php",
+                    "src/functions.php"
+                ],
+                "psr-4": {
+                    "Zlikavac32\\SymfonyExtras\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Marijan Šuflaj",
+                    "email": "msufflaj32@gmail.com"
+                }
+            ],
+            "description": "Various extra functionality for Symfony",
+            "keywords": [
+                "compiler-pass",
+                "console",
+                "dic",
+                "symfony"
+            ],
+            "time": "2019-04-25T18:07:39+00:00"
         }
     ],
     "packages-dev": [],

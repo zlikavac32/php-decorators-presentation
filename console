@@ -6,26 +6,35 @@ declare(strict_types=1);
 use Symfony\Component\Console\Application;
 use Symfony\Component\Lock\Factory;
 use Symfony\Component\Lock\Store\FlockStore;
+use Zlikavac32\SymfonyExtras\Command\Runnable\RunnableCommand;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
-require_once __DIR__ . '/AbstractExclusiveCommand.php';
-require_once __DIR__ . '/CalculateFibonacciCommand.php';
-require_once __DIR__ . '/CheckIsPrimeCommand.php';
+require_once __DIR__ . '/ExclusiveRunnable.php';
+require_once __DIR__ . '/CalculateFibonacciRunnable.php';
+require_once __DIR__ . '/CheckIsPrimeRunnable.php';
 
 $console = new Application();
 
 $lockFactory = new Factory(new FlockStore());
 
 $console->add(
-    new CalculateFibonacciCommand(
+    new RunnableCommand(
+        new ExclusiveRunnable(
+            new CalculateFibonacciRunnable(),
             $lockFactory,
+            'fib'
+        ),
         'fib'
     )
 );
 $console->add(
-    new CheckIsPrimeCommand(
-        $lockFactory,
+    new RunnableCommand(
+        new ExclusiveRunnable(
+            new CheckIsPrimeRunnable(),
+            $lockFactory,
+            'is-prime'
+        ),
         'is-prime'
     )
 );

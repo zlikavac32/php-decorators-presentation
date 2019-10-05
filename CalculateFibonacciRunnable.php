@@ -3,18 +3,22 @@
 declare(strict_types=1);
 
 use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputDefinition;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use Zlikavac32\SymfonyExtras\Command\Runnable\Runnable;
 
-class CalculateFibonacciCommand extends AbstractExclusiveCommand
+class CalculateFibonacciRunnable implements Runnable
 {
 
-    protected function configure()
+    public function configure(InputDefinition $inputDefinition): void
     {
-        $this->addArgument('n', InputArgument::REQUIRED, 'Fibonacci number to calculate');
+        $inputDefinition->addArgument(
+            new InputArgument('n', InputArgument::REQUIRED, 'Fibonacci number to calculate')
+        );
     }
 
-    protected function executeExclusive(InputInterface $input, OutputInterface $output): int
+    public function run(InputInterface $input, OutputInterface $output): int
     {
         $n = $input->getArgument('n');
 
