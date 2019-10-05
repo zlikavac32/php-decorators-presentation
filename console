@@ -4,6 +4,8 @@
 declare(strict_types=1);
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\Lock\Factory;
+use Symfony\Component\Lock\Store\FlockStore;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
@@ -11,6 +13,11 @@ require_once __DIR__ . '/CalculateFibonacciCommand.php';
 
 $console = new Application();
 
-$console->add(new CalculateFibonacciCommand('fib'));
+$console->add(
+    new CalculateFibonacciCommand(
+        new Factory(new FlockStore()),
+        'fib'
+    )
+);
 
 $console->run();

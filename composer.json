@@ -1,5 +1,6 @@
 {
     "require": {
-        "symfony/console": "^4.3"
+        "symfony/console": "^4.3",
+        "symfony/lock": "^4.3"
     }
 }
