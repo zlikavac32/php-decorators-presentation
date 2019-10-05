@@ -2,12 +2,11 @@
 
 declare(strict_types=1);
 
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class CheckIsPrimeCommand extends Command
+class CheckIsPrimeCommand extends AbstractExclusiveCommand
 {
 
     protected function configure()
@@ -15,7 +14,7 @@ class CheckIsPrimeCommand extends Command
         $this->addArgument('n', InputArgument::REQUIRED, 'Number to check');
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function executeExclusive(InputInterface $input, OutputInterface $output): int
     {
         $n =  (int) $input->getArgument('n');
 

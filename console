@@ -9,19 +9,25 @@ use Symfony\Component\Lock\Store\FlockStore;
 
 require_once __DIR__ . '/vendor/autoload.php';
 
+require_once __DIR__ . '/AbstractExclusiveCommand.php';
 require_once __DIR__ . '/CalculateFibonacciCommand.php';
 require_once __DIR__ . '/CheckIsPrimeCommand.php';
 
 $console = new Application();
 
+$lockFactory = new Factory(new FlockStore());
+
 $console->add(
     new CalculateFibonacciCommand(
-        new Factory(new FlockStore()),
+            $lockFactory,
         'fib'
     )
 );
 $console->add(
-    new CheckIsPrimeCommand('is-prime')
+    new CheckIsPrimeCommand(
+        $lockFactory,
+        'is-prime'
+    )
 );
 
 $console->run();
